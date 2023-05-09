@@ -297,11 +297,10 @@ After a few seconds, two outpul files should appear in the "out" subfolder.
   
 The second output file, which lacks the seed sequences, is particularly suited
 for further analysis of the flanking region of the seed sequence. It can be,
-for example, feed into the [blastx program](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
+for example, feed into the [`blastx` program](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
 to possibly identify the neighborhood of the seed.
 
-For the example data set, a blastx search suggests that *sul1* is flanked by genes
+For the example data set, a `blastx` search suggests that *sul1* is flanked by genes
 coding for an acetyltransferase and a multi-drug efflux pump of the QacE family.
 This is in perfect agreement with the (known) order of genes in the complete
 pB10 plasmid. Thus, the assembly was obviously successful.
-
