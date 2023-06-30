@@ -212,10 +212,10 @@ In that case, you copy 1/4 of the lines from the spreadsheet into 4 separate
 shell script files and run those with a sequence of commands like:
 
 ```
-nohup ./part1.sh >part1.log 2>&1 &`
-nohup ./part2.sh >part2.log 2>&1 &`
-nohup ./part3.sh >part3.log 2>&1 &`
-nohup ./part4.sh >part4.log 2>&1 &`
+nohup ./part1.sh >part1.log 2>&1 &
+nohup ./part2.sh >part2.log 2>&1 &
+nohup ./part3.sh >part3.log 2>&1 &
+nohup ./part4.sh >part4.log 2>&1 &
 ```
 
 You might want to write down the respective ID of the parent process displayed
