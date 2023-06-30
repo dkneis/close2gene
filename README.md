@@ -5,7 +5,7 @@ This repository contains R source code to perform a **seed-based assembly
 of DNA** reads to identify the flanking region of a particular sequence
 of interest (e.g. the context of an antibiotic resistance gene). It was
 originally developed to identify the context of *dfrB* genes in
-shotgun metagenomic data of environmental origin.
+shotgun metagenomic data of environmental origin by [Kneis et al., 2023, ISMEJ](10.1038/s41396-023-01460-7).
 
 The major practical advantage of seed-based assembly is the **very low RAM
 consumption**. Classical, graph-based assemblers may easily require hundreds
@@ -34,7 +34,7 @@ free of charge. Those are:
   installed `blastn`, you probably have this tool on board already.
 
 - `tar` : an archiving tool used to compress / unzip files which can be obtained,
-  for example, [from this Gnu website](https://www.gnu.org/software/tar/). Users
+  for example, [from this GNU website](https://www.gnu.org/software/tar/). Users
   of Linux probably have the tool installed.
 
 Make sure that these programs are actually findable, i.e. their respective
