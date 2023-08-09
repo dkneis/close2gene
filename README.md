@@ -138,7 +138,7 @@ nohup Rscript --vanilla main.r --args pool=../metagenomes/SRR9999.fasta.tar.gz
   program should appear. It is recommended that the directory is initially empty
   to prevent overwriting of possibly existing files.
 
-- `out prefix` : A prefix to be used as the first part of output file names.
+- `prefix` : A prefix to be used as the first part of output file names.
   Typically, you want to use (part of) the basename of the file used as `pool`.
 
 - `cleanup` : Must be either TRUE or FALSE (capitals required). If TRUE, all
