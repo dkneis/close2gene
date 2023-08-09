@@ -42,19 +42,38 @@ summarizeAssemblies <- function(
     fasta_export(f=fasta.full, x=out, col_id="id", col_seq="sequence")
     # export only the sequence which has beed appended to the seed
     seeds <- x[x[,"iteration"] == 1, c("id","sequence")]
+    
+    # this function is needed since grepl / gsub don't work properly
+    # if the pattern argument has several thousand characters
+    delete_seed_at_margin <- function(ass, seed) {
+      if (nchar(seed) <= nchar(ass)) {
+        if (substr(ass, 1, nchar(seed)) == seed) {
+          out <- paste0("N",substr(ass, nchar(seed)+1, nchar(ass)))
+        } else if (substr(ass, nchar(ass) - nchar(seed) + 1, nchar(ass)) == seed) {
+          out <- paste0(substr(ass, 1, nchar(ass) - nchar(seed)),"N")
+        } else {
+          stop("could not identify seed in assembled sequence")
+        }
+      } else {
+        stop("could not identify seed in assembled sequence")        
+      }
+      out
+    }
+    
     for (i in 1:nrow(out)) {
       s <- gsub(out[i,"id"], pattern=paste0("[",separ,"].*$"), replacement="")
       k <- which(seeds[,"id"] == s)
       if (length(k) != 1) {
         stop("failed to determine seed ID from header of assembly")
       }
-      if (grepl(out[i,"sequence"], pattern=paste0("^",seeds[k,"sequence"]))) {
-        out[i,"sequence"] <- gsub(out[i,"sequence"], pattern=paste0("^",seeds[k,"sequence"]), replacement="N")
-      } else if (grepl(out[i,"sequence"], pattern=paste0(seeds[k,"sequence"],"$"))) {
-        out[i,"sequence"] <- gsub(out[i,"sequence"], pattern=paste0(seeds[k,"sequence"],"$"), replacement="N")
-      } else {
-        stop("failed to delete seed from assembled sequence")
-      }
+#      if (grepl(out[i,"sequence"], pattern=paste0("^",seeds[k,"sequence"]))) {
+#        out[i,"sequence"] <- gsub(out[i,"sequence"], pattern=paste0("^",seeds[k,"sequence"]), replacement="N")
+#      } else if (grepl(out[i,"sequence"], pattern=paste0(seeds[k,"sequence"],"$"))) {
+#        out[i,"sequence"] <- gsub(out[i,"sequence"], pattern=paste0(seeds[k,"sequence"],"$"), replacement="N")
+#      } else {
+#        stop("failed to delete seed from assembled sequence")
+#      }
+      out[i,"sequence"] <- delete_seed_at_margin(out[i,"sequence"], seeds[k,"sequence"])
     }
     fasta_export(f=fasta.ext, x=out, col_id="id", col_seq="sequence")
   } else {
